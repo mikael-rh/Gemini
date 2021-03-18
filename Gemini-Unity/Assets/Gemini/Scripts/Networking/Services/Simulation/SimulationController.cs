@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Google.Protobuf;
 using Grpc.Core;
-using GeminiOSPInterface;
+using Simulation;
 
 namespace Gemini.Networking.Services
 {
@@ -55,7 +55,7 @@ namespace Gemini.Networking.Services
 
             server = new Server
             {
-                Services = { Simulation.BindService(serviceImpl) },
+                Services = { Simulation.Simulation.BindService(serviceImpl) },
                 Ports = { new ServerPort(host, _port, ServerCredentials.Insecure) }
             };
 

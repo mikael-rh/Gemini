@@ -95,6 +95,9 @@ namespace Gemini.Networking.Services {
             RenderRequest request, ServerCallContext context)
         {
             // Trigger camera to render 
+
+            Debug.Log("Render trigger");
+
             return await Task.FromResult(new RenderResponse
             {
                 Success = true,
