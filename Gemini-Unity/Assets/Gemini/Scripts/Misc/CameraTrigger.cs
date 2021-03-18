@@ -18,6 +18,12 @@ namespace Gemini.Misc
             camera.enabled = false;
         }
 
+        public void Render()
+        {
+            camera.Render(); 
+        }
+
+        /*
         void Update()
         {
             Debug.Log("Updating");
@@ -28,5 +34,6 @@ namespace Gemini.Misc
                 camera.Render();
             }
         }
+        */
     }
 }

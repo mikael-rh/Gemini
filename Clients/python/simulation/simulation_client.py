@@ -5,7 +5,7 @@ import simulation_pb2
 import simulation_pb2_grpc
 
 def run():
-    channel = grpc.insecure_channel('192.168.86.98:12346')
+    channel = grpc.insecure_channel('localhost:12346')
     stub = simulation_pb2_grpc.SimulationStub(channel)
 
     #result = stub.SetStartTime(simulation_pb2.SetStartTimeRequest(time=0.0))

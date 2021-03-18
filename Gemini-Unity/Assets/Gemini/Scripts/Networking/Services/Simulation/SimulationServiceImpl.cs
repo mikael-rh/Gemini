@@ -5,6 +5,7 @@ using Grpc.Core;
 using System.Threading;
 using Simulation;
 using Gemini.Core;
+using Gemini.Misc;
 using System;
 
 namespace Gemini.Networking.Services {
@@ -13,11 +14,13 @@ namespace Gemini.Networking.Services {
 
         private SimulationController _simulationController;
         private GameObject[] _boats;
+        private CameraTrigger _cameraTrigger;
 
-        public SimulationServiceImpl(SimulationController simulationController, GameObject[] boats)
+        public SimulationServiceImpl(SimulationController simulationController, GameObject[] boats, CameraTrigger cameraTrigger)
         {
             _simulationController = simulationController;
             _boats = boats;
+            _cameraTrigger = cameraTrigger;
         }
 
         public override async Task<StepResponse> DoStep(
@@ -97,6 +100,21 @@ namespace Gemini.Networking.Services {
             // Trigger camera to render 
 
             Debug.Log("Render trigger");
+            // Create the event that triggers when the execution of the action is finished.
+            ManualResetEvent signalEvent = new ManualResetEvent(false);
+
+            ThreadManager.ExecuteOnMainThread(() =>
+            {
+                _cameraTrigger.Render();
+                signalEvent.Set();
+
+            });
+
+            // Wait for the event to be triggered from the action, signaling that the action is finished
+            // This is required becaue we are reading and depending on state from a resource running on the
+            // Unity main thread.
+            signalEvent.WaitOne();
+            signalEvent.Close();
 
             return await Task.FromResult(new RenderResponse
             {

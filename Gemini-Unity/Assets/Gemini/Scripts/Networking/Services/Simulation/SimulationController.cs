@@ -4,6 +4,7 @@ using UnityEngine;
 using Google.Protobuf;
 using Grpc.Core;
 using Simulation;
+using Gemini.Misc;
 
 namespace Gemini.Networking.Services
 {
@@ -21,7 +22,7 @@ namespace Gemini.Networking.Services
         }
 
         public GameObject[] boatPrefabs;
-
+        public CameraTrigger cameraTrigger;
 
         private Server server;
         private SimulationServiceImpl serviceImpl;
@@ -40,6 +41,7 @@ namespace Gemini.Networking.Services
         {
             //Physics.autoSimulation = false;
 
+
             if (gameObject.GetComponent<Rigidbody>())
             {
                 _rigidBody = gameObject.GetComponent<Rigidbody>();
@@ -51,7 +53,7 @@ namespace Gemini.Networking.Services
                 _boats[prefabIdx] = Instantiate(boatPrefabs[prefabIdx], new Vector3(0, 0, 0), Quaternion.identity);
             }
 
-            serviceImpl = new SimulationServiceImpl(this, _boats);
+            serviceImpl = new SimulationServiceImpl(this, _boats, cameraTrigger);
 
             server = new Server
             {
