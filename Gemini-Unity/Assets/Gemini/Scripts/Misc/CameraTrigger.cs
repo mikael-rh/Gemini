@@ -2,30 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
-public class CameraTrigger : MonoBehaviour
+namespace Gemini.Misc
 {
-    public Camera camera;
-    public RenderTexture renderTexture;
-     
-
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(Camera))]
+    public class CameraTrigger : MonoBehaviour
     {
-        camera.targetTexture = renderTexture;
-        camera.enabled = false;
-    }
+        public Camera camera;
+        public RenderTexture renderTexture;
+         
 
-
-    void Update()
-    {
-        Debug.Log("Updating");
-       
-        if (Time.time > 10.0)
+        // Start is called before the first frame update
+        void Start()
         {
-            Debug.Log("Rendering frame");
-            camera.Render();
+            camera.targetTexture = renderTexture;
+            camera.enabled = false;
+        }
+
+        void Update()
+        {
+            Debug.Log("Updating");
+           
+            if (Time.time > 10.0)
+            {
+                Debug.Log("Rendering frame");
+                camera.Render();
+            }
         }
     }
-
 }

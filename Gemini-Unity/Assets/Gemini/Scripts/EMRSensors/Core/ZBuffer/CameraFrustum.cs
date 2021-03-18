@@ -43,7 +43,7 @@ namespace Gemini.EMRS.Core.ZBuffer{
             _farPlane = farPlane;
             _nearPlane = nearPlane;
             _verticalAngle = 2 * Mathf.Atan((float)pixelHeight*pixelSizeInMicroMeters*Mathf.Pow(10,-3)/(2 * focalLengthMilliMeters));
-            Debug.Log("_VerticalAngle" + _verticalAngle.ToString() + " power " + ((float)pixelHeight).ToString());
+            //Debug.Log("_VerticalAngle" + _verticalAngle.ToString() + " power " + ((float)pixelHeight).ToString());
 
             _aspectRatio = (float)_pixelWidth / (float)_pixelHeight;
             _horisontalAngle = 2 * Mathf.Atan(_aspectRatio * Mathf.Tan(_verticalAngle / 2));

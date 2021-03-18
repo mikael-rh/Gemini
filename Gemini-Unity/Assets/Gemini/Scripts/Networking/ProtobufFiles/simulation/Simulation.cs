@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace GeminiOSPInterface {
+namespace Simulation {
 
   /// <summary>Holder for reflection information generated from simulation/simulation.proto</summary>
   public static partial class SimulationReflection {
@@ -24,27 +24,31 @@ namespace GeminiOSPInterface {
     static SimulationReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChtzaW11bGF0aW9uL3NpbXVsYXRpb24ucHJvdG8SEkdlbWluaU9TUEludGVy",
-            "ZmFjZSI0CgRQb3NlEg0KBW5vcnRoGAEgASgCEgwKBGVhc3QYAiABKAISDwoH",
-            "aGVhZGluZxgDIAEoAiJcCgtTdGVwUmVxdWVzdBItCgtWZXNzZWxQb3NlcxgB",
-            "IAMoCzIYLkdlbWluaU9TUEludGVyZmFjZS5Qb3NlEgwKBHRpbWUYAiABKAIS",
-            "EAoIc3RlcFNpemUYAyABKAIiHwoMU3RlcFJlc3BvbnNlEg8KB3N1Y2Nlc3MY",
-            "ASABKAgiIwoTU2V0U3RhcnRUaW1lUmVxdWVzdBIMCgR0aW1lGAEgASgJIicK",
-            "FFNldFN0YXJ0VGltZVJlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgywAEKClNp",
-            "bXVsYXRpb24STQoGRG9TdGVwEh8uR2VtaW5pT1NQSW50ZXJmYWNlLlN0ZXBS",
-            "ZXF1ZXN0GiAuR2VtaW5pT1NQSW50ZXJmYWNlLlN0ZXBSZXNwb25zZSIAEmMK",
-            "DFNldFN0YXJ0VGltZRInLkdlbWluaU9TUEludGVyZmFjZS5TZXRTdGFydFRp",
-            "bWVSZXF1ZXN0GiguR2VtaW5pT1NQSW50ZXJmYWNlLlNldFN0YXJ0VGltZVJl",
-            "c3BvbnNlIgBCMgocYXV0b2ZlcnJ5LmNsaWVudHMuc2ltdWxhdGlvbkIKc2lt",
-            "dWxhdGlvblABogIDSExXYgZwcm90bzM="));
+            "ChtzaW11bGF0aW9uL3NpbXVsYXRpb24ucHJvdG8SCnNpbXVsYXRpb24iNAoE",
+            "UG9zZRINCgVub3J0aBgBIAEoAhIMCgRlYXN0GAIgASgCEg8KB2hlYWRpbmcY",
+            "AyABKAIiVAoLU3RlcFJlcXVlc3QSJQoLVmVzc2VsUG9zZXMYASADKAsyEC5z",
+            "aW11bGF0aW9uLlBvc2USDAoEdGltZRgCIAEoAhIQCghzdGVwU2l6ZRgDIAEo",
+            "AiIfCgxTdGVwUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCCIjChNTZXRTdGFy",
+            "dFRpbWVSZXF1ZXN0EgwKBHRpbWUYASABKAkiJwoUU2V0U3RhcnRUaW1lUmVz",
+            "cG9uc2USDwoHc3VjY2VzcxgBIAEoCCIfCg1SZW5kZXJSZXF1ZXN0Eg4KBnJl",
+            "bmRlchgBIAEoCCIhCg5SZW5kZXJSZXNwb25zZRIPCgdzdWNjZXNzGAEgASgI",
+            "MuMBCgpTaW11bGF0aW9uEj0KBkRvU3RlcBIXLnNpbXVsYXRpb24uU3RlcFJl",
+            "cXVlc3QaGC5zaW11bGF0aW9uLlN0ZXBSZXNwb25zZSIAElMKDFNldFN0YXJ0",
+            "VGltZRIfLnNpbXVsYXRpb24uU2V0U3RhcnRUaW1lUmVxdWVzdBogLnNpbXVs",
+            "YXRpb24uU2V0U3RhcnRUaW1lUmVzcG9uc2UiABJBCgZSZW5kZXISGS5zaW11",
+            "bGF0aW9uLlJlbmRlclJlcXVlc3QaGi5zaW11bGF0aW9uLlJlbmRlclJlc3Bv",
+            "bnNlIgBCKwoVb3JnLmdlbWluaS5zaW11bGF0aW9uQgpzaW11bGF0aW9uUAGi",
+            "AgNITFdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::GeminiOSPInterface.Pose), global::GeminiOSPInterface.Pose.Parser, new[]{ "North", "East", "Heading" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GeminiOSPInterface.StepRequest), global::GeminiOSPInterface.StepRequest.Parser, new[]{ "VesselPoses", "Time", "StepSize" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GeminiOSPInterface.StepResponse), global::GeminiOSPInterface.StepResponse.Parser, new[]{ "Success" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GeminiOSPInterface.SetStartTimeRequest), global::GeminiOSPInterface.SetStartTimeRequest.Parser, new[]{ "Time" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GeminiOSPInterface.SetStartTimeResponse), global::GeminiOSPInterface.SetStartTimeResponse.Parser, new[]{ "Success" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Simulation.Pose), global::Simulation.Pose.Parser, new[]{ "North", "East", "Heading" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Simulation.StepRequest), global::Simulation.StepRequest.Parser, new[]{ "VesselPoses", "Time", "StepSize" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Simulation.StepResponse), global::Simulation.StepResponse.Parser, new[]{ "Success" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Simulation.SetStartTimeRequest), global::Simulation.SetStartTimeRequest.Parser, new[]{ "Time" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Simulation.SetStartTimeResponse), global::Simulation.SetStartTimeResponse.Parser, new[]{ "Success" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Simulation.RenderRequest), global::Simulation.RenderRequest.Parser, new[]{ "Render" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Simulation.RenderResponse), global::Simulation.RenderResponse.Parser, new[]{ "Success" }, null, null, null)
           }));
     }
     #endregion
@@ -59,7 +63,7 @@ namespace GeminiOSPInterface {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GeminiOSPInterface.SimulationReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Simulation.SimulationReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -244,7 +248,7 @@ namespace GeminiOSPInterface {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GeminiOSPInterface.SimulationReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Simulation.SimulationReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -274,11 +278,11 @@ namespace GeminiOSPInterface {
 
     /// <summary>Field number for the "VesselPoses" field.</summary>
     public const int VesselPosesFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::GeminiOSPInterface.Pose> _repeated_vesselPoses_codec
-        = pb::FieldCodec.ForMessage(10, global::GeminiOSPInterface.Pose.Parser);
-    private readonly pbc::RepeatedField<global::GeminiOSPInterface.Pose> vesselPoses_ = new pbc::RepeatedField<global::GeminiOSPInterface.Pose>();
+    private static readonly pb::FieldCodec<global::Simulation.Pose> _repeated_vesselPoses_codec
+        = pb::FieldCodec.ForMessage(10, global::Simulation.Pose.Parser);
+    private readonly pbc::RepeatedField<global::Simulation.Pose> vesselPoses_ = new pbc::RepeatedField<global::Simulation.Pose>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::GeminiOSPInterface.Pose> VesselPoses {
+    public pbc::RepeatedField<global::Simulation.Pose> VesselPoses {
       get { return vesselPoses_; }
     }
 
@@ -421,7 +425,7 @@ namespace GeminiOSPInterface {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GeminiOSPInterface.SimulationReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Simulation.SimulationReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -550,7 +554,7 @@ namespace GeminiOSPInterface {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GeminiOSPInterface.SimulationReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Simulation.SimulationReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -679,7 +683,7 @@ namespace GeminiOSPInterface {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GeminiOSPInterface.SimulationReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Simulation.SimulationReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -773,6 +777,264 @@ namespace GeminiOSPInterface {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(SetStartTimeResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RenderRequest : pb::IMessage<RenderRequest> {
+    private static readonly pb::MessageParser<RenderRequest> _parser = new pb::MessageParser<RenderRequest>(() => new RenderRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RenderRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Simulation.SimulationReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RenderRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RenderRequest(RenderRequest other) : this() {
+      render_ = other.render_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RenderRequest Clone() {
+      return new RenderRequest(this);
+    }
+
+    /// <summary>Field number for the "render" field.</summary>
+    public const int RenderFieldNumber = 1;
+    private bool render_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Render {
+      get { return render_; }
+      set {
+        render_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RenderRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RenderRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Render != other.Render) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Render != false) hash ^= Render.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Render != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Render);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Render != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RenderRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Render != false) {
+        Render = other.Render;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Render = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RenderResponse : pb::IMessage<RenderResponse> {
+    private static readonly pb::MessageParser<RenderResponse> _parser = new pb::MessageParser<RenderResponse>(() => new RenderResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RenderResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Simulation.SimulationReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RenderResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RenderResponse(RenderResponse other) : this() {
+      success_ = other.success_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RenderResponse Clone() {
+      return new RenderResponse(this);
+    }
+
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RenderResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RenderResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Success != other.Success) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Success != false) hash ^= Success.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Success != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RenderResponse other) {
       if (other == null) {
         return;
       }

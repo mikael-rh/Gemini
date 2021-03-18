@@ -7,46 +7,60 @@
 
 using grpc = global::Grpc.Core;
 
-namespace GeminiOSPInterface {
+namespace Simulation {
   public static partial class Simulation
   {
-    static readonly string __ServiceName = "GeminiOSPInterface.Simulation";
+    static readonly string __ServiceName = "simulation.Simulation";
 
-    static readonly grpc::Marshaller<global::GeminiOSPInterface.StepRequest> __Marshaller_GeminiOSPInterface_StepRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GeminiOSPInterface.StepRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GeminiOSPInterface.StepResponse> __Marshaller_GeminiOSPInterface_StepResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GeminiOSPInterface.StepResponse.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GeminiOSPInterface.SetStartTimeRequest> __Marshaller_GeminiOSPInterface_SetStartTimeRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GeminiOSPInterface.SetStartTimeRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::GeminiOSPInterface.SetStartTimeResponse> __Marshaller_GeminiOSPInterface_SetStartTimeResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::GeminiOSPInterface.SetStartTimeResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Simulation.StepRequest> __Marshaller_simulation_StepRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Simulation.StepRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Simulation.StepResponse> __Marshaller_simulation_StepResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Simulation.StepResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Simulation.SetStartTimeRequest> __Marshaller_simulation_SetStartTimeRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Simulation.SetStartTimeRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Simulation.SetStartTimeResponse> __Marshaller_simulation_SetStartTimeResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Simulation.SetStartTimeResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Simulation.RenderRequest> __Marshaller_simulation_RenderRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Simulation.RenderRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Simulation.RenderResponse> __Marshaller_simulation_RenderResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Simulation.RenderResponse.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::GeminiOSPInterface.StepRequest, global::GeminiOSPInterface.StepResponse> __Method_DoStep = new grpc::Method<global::GeminiOSPInterface.StepRequest, global::GeminiOSPInterface.StepResponse>(
+    static readonly grpc::Method<global::Simulation.StepRequest, global::Simulation.StepResponse> __Method_DoStep = new grpc::Method<global::Simulation.StepRequest, global::Simulation.StepResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "DoStep",
-        __Marshaller_GeminiOSPInterface_StepRequest,
-        __Marshaller_GeminiOSPInterface_StepResponse);
+        __Marshaller_simulation_StepRequest,
+        __Marshaller_simulation_StepResponse);
 
-    static readonly grpc::Method<global::GeminiOSPInterface.SetStartTimeRequest, global::GeminiOSPInterface.SetStartTimeResponse> __Method_SetStartTime = new grpc::Method<global::GeminiOSPInterface.SetStartTimeRequest, global::GeminiOSPInterface.SetStartTimeResponse>(
+    static readonly grpc::Method<global::Simulation.SetStartTimeRequest, global::Simulation.SetStartTimeResponse> __Method_SetStartTime = new grpc::Method<global::Simulation.SetStartTimeRequest, global::Simulation.SetStartTimeResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "SetStartTime",
-        __Marshaller_GeminiOSPInterface_SetStartTimeRequest,
-        __Marshaller_GeminiOSPInterface_SetStartTimeResponse);
+        __Marshaller_simulation_SetStartTimeRequest,
+        __Marshaller_simulation_SetStartTimeResponse);
+
+    static readonly grpc::Method<global::Simulation.RenderRequest, global::Simulation.RenderResponse> __Method_Render = new grpc::Method<global::Simulation.RenderRequest, global::Simulation.RenderResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Render",
+        __Marshaller_simulation_RenderRequest,
+        __Marshaller_simulation_RenderResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::GeminiOSPInterface.SimulationReflection.Descriptor.Services[0]; }
+      get { return global::Simulation.SimulationReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of Simulation</summary>
     [grpc::BindServiceMethod(typeof(Simulation), "BindService")]
     public abstract partial class SimulationBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::GeminiOSPInterface.StepResponse> DoStep(global::GeminiOSPInterface.StepRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Simulation.StepResponse> DoStep(global::Simulation.StepRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::GeminiOSPInterface.SetStartTimeResponse> SetStartTime(global::GeminiOSPInterface.SetStartTimeRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Simulation.SetStartTimeResponse> SetStartTime(global::Simulation.SetStartTimeRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Simulation.RenderResponse> Render(global::Simulation.RenderRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -76,37 +90,53 @@ namespace GeminiOSPInterface {
       {
       }
 
-      public virtual global::GeminiOSPInterface.StepResponse DoStep(global::GeminiOSPInterface.StepRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Simulation.StepResponse DoStep(global::Simulation.StepRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DoStep(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::GeminiOSPInterface.StepResponse DoStep(global::GeminiOSPInterface.StepRequest request, grpc::CallOptions options)
+      public virtual global::Simulation.StepResponse DoStep(global::Simulation.StepRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_DoStep, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::GeminiOSPInterface.StepResponse> DoStepAsync(global::GeminiOSPInterface.StepRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Simulation.StepResponse> DoStepAsync(global::Simulation.StepRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return DoStepAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::GeminiOSPInterface.StepResponse> DoStepAsync(global::GeminiOSPInterface.StepRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Simulation.StepResponse> DoStepAsync(global::Simulation.StepRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_DoStep, null, options, request);
       }
-      public virtual global::GeminiOSPInterface.SetStartTimeResponse SetStartTime(global::GeminiOSPInterface.SetStartTimeRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Simulation.SetStartTimeResponse SetStartTime(global::Simulation.SetStartTimeRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SetStartTime(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::GeminiOSPInterface.SetStartTimeResponse SetStartTime(global::GeminiOSPInterface.SetStartTimeRequest request, grpc::CallOptions options)
+      public virtual global::Simulation.SetStartTimeResponse SetStartTime(global::Simulation.SetStartTimeRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_SetStartTime, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::GeminiOSPInterface.SetStartTimeResponse> SetStartTimeAsync(global::GeminiOSPInterface.SetStartTimeRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Simulation.SetStartTimeResponse> SetStartTimeAsync(global::Simulation.SetStartTimeRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SetStartTimeAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::GeminiOSPInterface.SetStartTimeResponse> SetStartTimeAsync(global::GeminiOSPInterface.SetStartTimeRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Simulation.SetStartTimeResponse> SetStartTimeAsync(global::Simulation.SetStartTimeRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_SetStartTime, null, options, request);
+      }
+      public virtual global::Simulation.RenderResponse Render(global::Simulation.RenderRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Render(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Simulation.RenderResponse Render(global::Simulation.RenderRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Render, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Simulation.RenderResponse> RenderAsync(global::Simulation.RenderRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RenderAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Simulation.RenderResponse> RenderAsync(global::Simulation.RenderRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Render, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override SimulationClient NewInstance(ClientBaseConfiguration configuration)
@@ -121,7 +151,8 @@ namespace GeminiOSPInterface {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_DoStep, serviceImpl.DoStep)
-          .AddMethod(__Method_SetStartTime, serviceImpl.SetStartTime).Build();
+          .AddMethod(__Method_SetStartTime, serviceImpl.SetStartTime)
+          .AddMethod(__Method_Render, serviceImpl.Render).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -130,8 +161,9 @@ namespace GeminiOSPInterface {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, SimulationBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_DoStep, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GeminiOSPInterface.StepRequest, global::GeminiOSPInterface.StepResponse>(serviceImpl.DoStep));
-      serviceBinder.AddMethod(__Method_SetStartTime, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GeminiOSPInterface.SetStartTimeRequest, global::GeminiOSPInterface.SetStartTimeResponse>(serviceImpl.SetStartTime));
+      serviceBinder.AddMethod(__Method_DoStep, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Simulation.StepRequest, global::Simulation.StepResponse>(serviceImpl.DoStep));
+      serviceBinder.AddMethod(__Method_SetStartTime, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Simulation.SetStartTimeRequest, global::Simulation.SetStartTimeResponse>(serviceImpl.SetStartTime));
+      serviceBinder.AddMethod(__Method_Render, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Simulation.RenderRequest, global::Simulation.RenderResponse>(serviceImpl.Render));
     }
 
   }

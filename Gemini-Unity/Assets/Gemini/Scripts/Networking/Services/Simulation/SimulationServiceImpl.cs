@@ -3,12 +3,12 @@ using UnityEngine;
 using System.Threading.Tasks;
 using Grpc.Core;
 using System.Threading;
-using GeminiOSPInterface;
+using Simulation;
 using Gemini.Core;
 using System;
 
 namespace Gemini.Networking.Services {
-    public class SimulationServiceImpl : Simulation.SimulationBase
+    public class SimulationServiceImpl : Simulation.Simulation.SimulationBase
     {
 
         private SimulationController _simulationController;
@@ -29,7 +29,7 @@ namespace Gemini.Networking.Services {
             List<Pose> poses = new List<Pose>();
 
             // Converting the poses that to a simple List<Pose> instead of ReapeatedField
-            foreach (GeminiOSPInterface.Pose pose in request.VesselPoses)
+            foreach (Simulation.Pose pose in request.VesselPoses)
             {
                 poses.Add(new Pose(pose.North, pose.East, pose.Heading));
             }
@@ -86,6 +86,19 @@ namespace Gemini.Networking.Services {
 
             // Sets the step size in simulation controller
             return await Task.FromResult(new SetStartTimeResponse
+            {
+                Success = true,
+            });
+        }
+
+        public override async Task<RenderResponse> Render(
+            RenderRequest request, ServerCallContext context)
+        {
+            // Trigger camera to render 
+
+            Debug.Log("Render trigger");
+
+            return await Task.FromResult(new RenderResponse
             {
                 Success = true,
             });
