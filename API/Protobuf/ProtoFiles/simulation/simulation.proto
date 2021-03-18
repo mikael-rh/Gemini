@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "autoferry.clients.simulation";
+option java_package = "org.gemini.simulation";
 option java_outer_classname = "simulation";
 option objc_class_prefix = "HLW";
 
