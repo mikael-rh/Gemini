@@ -10,7 +10,7 @@ def run():
 
     #result = stub.SetStartTime(simulation_pb2.SetStartTimeRequest(time=0.0))
 
-    result = stub.Render(simulation_pb2_.RenderRequest(render=True))
+    result = stub.Render(simulation_pb2.RenderRequest(render=True))
 
 
 if __name__ == "__main__":

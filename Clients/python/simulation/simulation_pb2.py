@@ -15,11 +15,11 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='simulation.proto',
-  package='GeminiOSPInterface',
+  package='simulation',
   syntax='proto3',
-  serialized_options=b'\n\034autoferry.clients.simulationB\nsimulationP\001\242\002\003HLW',
+  serialized_options=b'\n\025org.gemini.simulationB\nsimulationP\001\242\002\003HLW',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x10simulation.proto\x12\x12GeminiOSPInterface\"4\n\x04Pose\x12\r\n\x05north\x18\x01 \x01(\x02\x12\x0c\n\x04\x65\x61st\x18\x02 \x01(\x02\x12\x0f\n\x07heading\x18\x03 \x01(\x02\"\\\n\x0bStepRequest\x12-\n\x0bVesselPoses\x18\x01 \x03(\x0b\x32\x18.GeminiOSPInterface.Pose\x12\x0c\n\x04time\x18\x02 \x01(\x02\x12\x10\n\x08stepSize\x18\x03 \x01(\x02\"\x1f\n\x0cStepResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"#\n\x13SetStartTimeRequest\x12\x0c\n\x04time\x18\x01 \x01(\t\"\'\n\x14SetStartTimeResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\xc0\x01\n\nSimulation\x12M\n\x06\x44oStep\x12\x1f.GeminiOSPInterface.StepRequest\x1a .GeminiOSPInterface.StepResponse\"\x00\x12\x63\n\x0cSetStartTime\x12\'.GeminiOSPInterface.SetStartTimeRequest\x1a(.GeminiOSPInterface.SetStartTimeResponse\"\x00\x42\x32\n\x1c\x61utoferry.clients.simulationB\nsimulationP\x01\xa2\x02\x03HLWb\x06proto3'
+  serialized_pb=b'\n\x10simulation.proto\x12\nsimulation\"4\n\x04Pose\x12\r\n\x05north\x18\x01 \x01(\x02\x12\x0c\n\x04\x65\x61st\x18\x02 \x01(\x02\x12\x0f\n\x07heading\x18\x03 \x01(\x02\"T\n\x0bStepRequest\x12%\n\x0bVesselPoses\x18\x01 \x03(\x0b\x32\x10.simulation.Pose\x12\x0c\n\x04time\x18\x02 \x01(\x02\x12\x10\n\x08stepSize\x18\x03 \x01(\x02\"\x1f\n\x0cStepResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"#\n\x13SetStartTimeRequest\x12\x0c\n\x04time\x18\x01 \x01(\t\"\'\n\x14SetStartTimeResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\x1f\n\rRenderRequest\x12\x0e\n\x06render\x18\x01 \x01(\x08\"!\n\x0eRenderResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\xe3\x01\n\nSimulation\x12=\n\x06\x44oStep\x12\x17.simulation.StepRequest\x1a\x18.simulation.StepResponse\"\x00\x12S\n\x0cSetStartTime\x12\x1f.simulation.SetStartTimeRequest\x1a .simulation.SetStartTimeResponse\"\x00\x12\x41\n\x06Render\x12\x19.simulation.RenderRequest\x1a\x1a.simulation.RenderResponse\"\x00\x42+\n\x15org.gemini.simulationB\nsimulationP\x01\xa2\x02\x03HLWb\x06proto3'
 )
 
 
@@ -27,28 +27,28 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _POSE = _descriptor.Descriptor(
   name='Pose',
-  full_name='GeminiOSPInterface.Pose',
+  full_name='simulation.Pose',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='north', full_name='GeminiOSPInterface.Pose.north', index=0,
+      name='north', full_name='simulation.Pose.north', index=0,
       number=1, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='east', full_name='GeminiOSPInterface.Pose.east', index=1,
+      name='east', full_name='simulation.Pose.east', index=1,
       number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='heading', full_name='GeminiOSPInterface.Pose.heading', index=2,
+      name='heading', full_name='simulation.Pose.heading', index=2,
       number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -66,35 +66,35 @@ _POSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=40,
-  serialized_end=92,
+  serialized_start=32,
+  serialized_end=84,
 )
 
 
 _STEPREQUEST = _descriptor.Descriptor(
   name='StepRequest',
-  full_name='GeminiOSPInterface.StepRequest',
+  full_name='simulation.StepRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='VesselPoses', full_name='GeminiOSPInterface.StepRequest.VesselPoses', index=0,
+      name='VesselPoses', full_name='simulation.StepRequest.VesselPoses', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='time', full_name='GeminiOSPInterface.StepRequest.time', index=1,
+      name='time', full_name='simulation.StepRequest.time', index=1,
       number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='stepSize', full_name='GeminiOSPInterface.StepRequest.stepSize', index=2,
+      name='stepSize', full_name='simulation.StepRequest.stepSize', index=2,
       number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -112,21 +112,21 @@ _STEPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=94,
-  serialized_end=186,
+  serialized_start=86,
+  serialized_end=170,
 )
 
 
 _STEPRESPONSE = _descriptor.Descriptor(
   name='StepResponse',
-  full_name='GeminiOSPInterface.StepResponse',
+  full_name='simulation.StepResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='success', full_name='GeminiOSPInterface.StepResponse.success', index=0,
+      name='success', full_name='simulation.StepResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -144,21 +144,21 @@ _STEPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=188,
-  serialized_end=219,
+  serialized_start=172,
+  serialized_end=203,
 )
 
 
 _SETSTARTTIMEREQUEST = _descriptor.Descriptor(
   name='SetStartTimeRequest',
-  full_name='GeminiOSPInterface.SetStartTimeRequest',
+  full_name='simulation.SetStartTimeRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='time', full_name='GeminiOSPInterface.SetStartTimeRequest.time', index=0,
+      name='time', full_name='simulation.SetStartTimeRequest.time', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -176,21 +176,21 @@ _SETSTARTTIMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=221,
-  serialized_end=256,
+  serialized_start=205,
+  serialized_end=240,
 )
 
 
 _SETSTARTTIMERESPONSE = _descriptor.Descriptor(
   name='SetStartTimeResponse',
-  full_name='GeminiOSPInterface.SetStartTimeResponse',
+  full_name='simulation.SetStartTimeResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='success', full_name='GeminiOSPInterface.SetStartTimeResponse.success', index=0,
+      name='success', full_name='simulation.SetStartTimeResponse.success', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -208,8 +208,72 @@ _SETSTARTTIMERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=258,
-  serialized_end=297,
+  serialized_start=242,
+  serialized_end=281,
+)
+
+
+_RENDERREQUEST = _descriptor.Descriptor(
+  name='RenderRequest',
+  full_name='simulation.RenderRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='render', full_name='simulation.RenderRequest.render', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=283,
+  serialized_end=314,
+)
+
+
+_RENDERRESPONSE = _descriptor.Descriptor(
+  name='RenderResponse',
+  full_name='simulation.RenderResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='success', full_name='simulation.RenderResponse.success', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=316,
+  serialized_end=349,
 )
 
 _STEPREQUEST.fields_by_name['VesselPoses'].message_type = _POSE
@@ -218,59 +282,75 @@ DESCRIPTOR.message_types_by_name['StepRequest'] = _STEPREQUEST
 DESCRIPTOR.message_types_by_name['StepResponse'] = _STEPRESPONSE
 DESCRIPTOR.message_types_by_name['SetStartTimeRequest'] = _SETSTARTTIMEREQUEST
 DESCRIPTOR.message_types_by_name['SetStartTimeResponse'] = _SETSTARTTIMERESPONSE
+DESCRIPTOR.message_types_by_name['RenderRequest'] = _RENDERREQUEST
+DESCRIPTOR.message_types_by_name['RenderResponse'] = _RENDERRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Pose = _reflection.GeneratedProtocolMessageType('Pose', (_message.Message,), {
   'DESCRIPTOR' : _POSE,
   '__module__' : 'simulation_pb2'
-  # @@protoc_insertion_point(class_scope:GeminiOSPInterface.Pose)
+  # @@protoc_insertion_point(class_scope:simulation.Pose)
   })
 _sym_db.RegisterMessage(Pose)
 
 StepRequest = _reflection.GeneratedProtocolMessageType('StepRequest', (_message.Message,), {
   'DESCRIPTOR' : _STEPREQUEST,
   '__module__' : 'simulation_pb2'
-  # @@protoc_insertion_point(class_scope:GeminiOSPInterface.StepRequest)
+  # @@protoc_insertion_point(class_scope:simulation.StepRequest)
   })
 _sym_db.RegisterMessage(StepRequest)
 
 StepResponse = _reflection.GeneratedProtocolMessageType('StepResponse', (_message.Message,), {
   'DESCRIPTOR' : _STEPRESPONSE,
   '__module__' : 'simulation_pb2'
-  # @@protoc_insertion_point(class_scope:GeminiOSPInterface.StepResponse)
+  # @@protoc_insertion_point(class_scope:simulation.StepResponse)
   })
 _sym_db.RegisterMessage(StepResponse)
 
 SetStartTimeRequest = _reflection.GeneratedProtocolMessageType('SetStartTimeRequest', (_message.Message,), {
   'DESCRIPTOR' : _SETSTARTTIMEREQUEST,
   '__module__' : 'simulation_pb2'
-  # @@protoc_insertion_point(class_scope:GeminiOSPInterface.SetStartTimeRequest)
+  # @@protoc_insertion_point(class_scope:simulation.SetStartTimeRequest)
   })
 _sym_db.RegisterMessage(SetStartTimeRequest)
 
 SetStartTimeResponse = _reflection.GeneratedProtocolMessageType('SetStartTimeResponse', (_message.Message,), {
   'DESCRIPTOR' : _SETSTARTTIMERESPONSE,
   '__module__' : 'simulation_pb2'
-  # @@protoc_insertion_point(class_scope:GeminiOSPInterface.SetStartTimeResponse)
+  # @@protoc_insertion_point(class_scope:simulation.SetStartTimeResponse)
   })
 _sym_db.RegisterMessage(SetStartTimeResponse)
+
+RenderRequest = _reflection.GeneratedProtocolMessageType('RenderRequest', (_message.Message,), {
+  'DESCRIPTOR' : _RENDERREQUEST,
+  '__module__' : 'simulation_pb2'
+  # @@protoc_insertion_point(class_scope:simulation.RenderRequest)
+  })
+_sym_db.RegisterMessage(RenderRequest)
+
+RenderResponse = _reflection.GeneratedProtocolMessageType('RenderResponse', (_message.Message,), {
+  'DESCRIPTOR' : _RENDERRESPONSE,
+  '__module__' : 'simulation_pb2'
+  # @@protoc_insertion_point(class_scope:simulation.RenderResponse)
+  })
+_sym_db.RegisterMessage(RenderResponse)
 
 
 DESCRIPTOR._options = None
 
 _SIMULATION = _descriptor.ServiceDescriptor(
   name='Simulation',
-  full_name='GeminiOSPInterface.Simulation',
+  full_name='simulation.Simulation',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=300,
-  serialized_end=492,
+  serialized_start=352,
+  serialized_end=579,
   methods=[
   _descriptor.MethodDescriptor(
     name='DoStep',
-    full_name='GeminiOSPInterface.Simulation.DoStep',
+    full_name='simulation.Simulation.DoStep',
     index=0,
     containing_service=None,
     input_type=_STEPREQUEST,
@@ -280,11 +360,21 @@ _SIMULATION = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='SetStartTime',
-    full_name='GeminiOSPInterface.Simulation.SetStartTime',
+    full_name='simulation.Simulation.SetStartTime',
     index=1,
     containing_service=None,
     input_type=_SETSTARTTIMEREQUEST,
     output_type=_SETSTARTTIMERESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Render',
+    full_name='simulation.Simulation.Render',
+    index=2,
+    containing_service=None,
+    input_type=_RENDERREQUEST,
+    output_type=_RENDERRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
