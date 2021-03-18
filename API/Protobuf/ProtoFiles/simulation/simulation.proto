@@ -5,11 +5,12 @@ option java_package = "org.gemini.simulation";
 option java_outer_classname = "simulation";
 option objc_class_prefix = "HLW";
 
-package GeminiOSPInterface;
+package simulation;
 
 service Simulation {
     rpc DoStep(StepRequest) returns (StepResponse) {}
 	rpc SetStartTime(SetStartTimeRequest) returns (SetStartTimeResponse) {}
+    rpc Render(RenderRequest) returns (RenderResponse) {}
 }
 
 message Pose {
@@ -34,4 +35,12 @@ message SetStartTimeRequest {
 
 message SetStartTimeResponse {
 	bool success = 1;
+}
+
+message RenderRequest {
+    bool render = 1;
+}
+
+message RenderResponse {
+    bool success = 1;
 }
