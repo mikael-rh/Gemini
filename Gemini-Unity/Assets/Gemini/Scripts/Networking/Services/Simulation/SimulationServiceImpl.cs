@@ -11,6 +11,10 @@ namespace Gemini.Networking.Services {
     public class SimulationServiceImpl : Simulation.SimulationBase
     {
 
+        delegate void Something (StepRequest request);
+
+        delegate StepResponse SomethingElse (StepRequest request);
+
         private SimulationController _simulationController;
         private GameObject[] _boats;
 
@@ -58,9 +62,10 @@ namespace Gemini.Networking.Services {
             signalEvent.WaitOne();
             signalEvent.Close();
 
-            Something action = _simulationController.ExecuteSimulationRequest;
+            
+            Execute(_simulationController.ExecuteStepRequest, request);
 
-            Execute(action, request);    
+            ExecuteWithResult(_simulationController.ExcuteStepRequestWithResult, request);
 
             return await Task.FromResult(new StepResponse
             {
@@ -68,9 +73,6 @@ namespace Gemini.Networking.Services {
             });
         }
 
-        delegate void Something (StepRequest request);
-
-        delegate float SomethingElse (StepRequest request);
 
         public override async Task<SetStartTimeResponse> SetStartTime(
             SetStartTimeRequest request, ServerCallContext context)
@@ -115,5 +117,26 @@ namespace Gemini.Networking.Services {
             signalEvent.WaitOne();
             signalEvent.Close();
         }
+
+        private StepResponse ExecuteWithResult(SomethingElse func, StepRequest request)
+        {
+            StepResponse response = new StepResponse();
+            ManualResetEvent signalEvent = new ManualResetEvent(false);
+
+            ThreadManager.ExecuteOnMainThread(() =>
+            {
+                response = func.Invoke(request);
+                signalEvent.Set();
+            });
+
+            // Wait for the event to be triggered from the action, signaling that the action is finished
+            // This is required becaue we are reading and depending on state from a resource running on the
+            // Unity main thread.
+            signalEvent.WaitOne();
+            signalEvent.Close();
+            //return func(request);
+            return response;
+        }
+
     }
 }

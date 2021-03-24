@@ -89,9 +89,17 @@ namespace Gemini.Networking.Services
             _stepSize = stepSize;
         }
 
-        public void ExecuteSimulationRequest(StepRequest request)
+        public void ExecuteStepRequest(StepRequest request)
         {
             Debug.Log(request);
+            Debug.Log("Ocean inside exec: " + GameObject.Find("Ocean"));
+        }
+
+        public StepResponse ExcuteStepRequestWithResult(StepRequest request)
+        {
+            Debug.Log("Handling with response!");
+            Debug.Log("Ocean inside exec with result: " + GameObject.Find("Ocean"));
+            return new StepResponse();
         }
 
     }
