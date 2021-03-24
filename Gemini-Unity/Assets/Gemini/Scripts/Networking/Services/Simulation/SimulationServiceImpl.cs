@@ -58,11 +58,19 @@ namespace Gemini.Networking.Services {
             signalEvent.WaitOne();
             signalEvent.Close();
 
+            Something action = _simulationController.ExecuteSimulationRequest;
+
+            Execute(action, request);    
+
             return await Task.FromResult(new StepResponse
             {
                 Success = true,
             });
         }
+
+        delegate void Something (StepRequest request);
+
+        delegate float SomethingElse (StepRequest request);
 
         public override async Task<SetStartTimeResponse> SetStartTime(
             SetStartTimeRequest request, ServerCallContext context)
@@ -89,6 +97,23 @@ namespace Gemini.Networking.Services {
             {
                 Success = true,
             });
+        }
+
+        private void Execute(Something action, StepRequest request)
+        {
+            ManualResetEvent signalEvent = new ManualResetEvent(false);
+
+            ThreadManager.ExecuteOnMainThread(() =>
+            {
+                action.Invoke(request);
+                signalEvent.Set();
+            });
+
+            // Wait for the event to be triggered from the action, signaling that the action is finished
+            // This is required becaue we are reading and depending on state from a resource running on the
+            // Unity main thread.
+            signalEvent.WaitOne();
+            signalEvent.Close();
         }
     }
 }

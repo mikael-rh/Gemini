@@ -89,5 +89,10 @@ namespace Gemini.Networking.Services
             _stepSize = stepSize;
         }
 
+        public void ExecuteSimulationRequest(StepRequest request)
+        {
+            Debug.Log(request);
+        }
+
     }
 }
