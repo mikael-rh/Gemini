@@ -11,8 +11,6 @@ namespace Gemini.Networking.Services
     {
         public string host = "localhost";
 
-        //private int _port = ServicePortGenerator.GenPort();
-
         private int _port = 12346;
 
         public int Port
@@ -22,28 +20,16 @@ namespace Gemini.Networking.Services
 
         public GameObject[] boatPrefabs;
 
-
         private Server server;
+
         private SimulationServiceImpl serviceImpl;
 
-        private Vector3 _force = new Vector3();
-        private Vector3 _torque = new Vector3();
-
-        private Rigidbody _rigidBody;
         private GameObject[] _boats;
 
-        private float _timer;
-        private float _stepSize;
+        private string _startTime;
 
-        // Start is called before the first frame update
         void Start()
         {
-            //Physics.autoSimulation = false;
-
-            if (gameObject.GetComponent<Rigidbody>())
-            {
-                _rigidBody = gameObject.GetComponent<Rigidbody>();
-            }
 
             _boats = new GameObject[boatPrefabs.Length];
             for (int prefabIdx = 0; prefabIdx < boatPrefabs.Length; prefabIdx++)
@@ -51,7 +37,7 @@ namespace Gemini.Networking.Services
                 _boats[prefabIdx] = Instantiate(boatPrefabs[prefabIdx], new Vector3(0, 0, 0), Quaternion.identity);
             }
 
-            serviceImpl = new SimulationServiceImpl(this, _boats);
+            serviceImpl = new SimulationServiceImpl(this);
 
             server = new Server
             {
@@ -63,43 +49,39 @@ namespace Gemini.Networking.Services
             server.Start();
         }
 
-        void Update()
+        public StepResponse DoStep(StepRequest request)
         {
-
+            UpdateBoats(request);
+            return new StepResponse{Success = true};
         }
 
-        void FixedUpdate()
+        public SetStartTimeResponse SetStartTime(SetStartTimeRequest request)
         {
-
+            _startTime = request.Time;
+            return new SetStartTimeResponse{Success = true};
         }
 
-        public void SetForce(Vector3 force)
+        private void UpdateBoats(StepRequest request)
         {
-            _force = force;
-        }
+            Debug.Log("Updating boats");
+            List<VesselPose> poses = new List<VesselPose>();
 
-        public void SetTorque(Vector3 torque)
-        {
-            _torque = torque;
-        }
+            // Converting the poses that to a simple List<Pose> instead of ReapeatedField
+            foreach (GeminiOSPInterface.Pose pose in request.VesselPoses)
+            {
+                poses.Add(new VesselPose(pose.North, pose.East, pose.Heading));
+            }
 
-
-        public void SetStepSize(float stepSize)
-        {
-            _stepSize = stepSize;
-        }
-
-        public void ExecuteStepRequest(StepRequest request)
-        {
-            Debug.Log(request);
-            Debug.Log("Ocean inside exec: " + GameObject.Find("Ocean"));
-        }
-
-        public StepResponse ExcuteStepRequestWithResult(StepRequest request)
-        {
-            Debug.Log("Handling with response!");
-            Debug.Log("Ocean inside exec with result: " + GameObject.Find("Ocean"));
-            return new StepResponse();
+            for (int boatIdx = 0; boatIdx < _boats.Length; boatIdx++)
+            {
+                if (boatIdx < _boats.Length)
+                {
+                    _boats[boatIdx].transform.position = new Vector3(poses[boatIdx].East,0,poses[boatIdx].North);
+                    float Heading = poses[boatIdx].Heading;
+                    Quaternion QuaternionRot = Quaternion.AngleAxis(Heading, new Vector3(0, 1, 0));
+                    _boats[boatIdx].transform.rotation = QuaternionRot;
+                }
+            }
         }
 
     }
