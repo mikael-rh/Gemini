@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Gemini.Networking.Services;
 using GeminiOSPInterface;
-
+using Grpc.Core;
 
 public class BoatController : ControllerBase, ISimulationService 
 {
     private static bool isServiceInitialized = false;
-    private SimulationServiceImpl serviceImpl;
+    private static SimulationServiceImpl serviceImpl;
 
     private string _startTime;
 
     private GameObject[] _boats;
+    
+    public GameObject[] boatPrefabs;
 
     public StepResponse DoStep(StepRequest request)
     {
@@ -51,14 +53,26 @@ public class BoatController : ControllerBase, ISimulationService
 
     void Start()
     {
-        /*
-        if (!isServiceInitialized)
-        {
-            serviceImpl = new SimulationServiceImpl(this);
-            server.Services.Add(Simulation.BindService(serviceImpl));
-            isServiceInitialized = true;
-        }
-        */
-    }
 
+            _boats = new GameObject[boatPrefabs.Length];
+            for (int prefabIdx = 0; prefabIdx < boatPrefabs.Length; prefabIdx++)
+            {
+                _boats[prefabIdx] = Instantiate(boatPrefabs[prefabIdx], new Vector3(0, 0, 0), Quaternion.identity);
+            }
+
+            if (!isServiceInitialized) 
+                serviceImpl = new SimulationServiceImpl(this);
+
+            if (!isServerinInitialized)
+            {
+                server = new Server
+                {
+                    Services = { Simulation.BindService(serviceImpl) },
+                    Ports = { new ServerPort(host, _port, ServerCredentials.Insecure) }
+                };
+            }
+
+            Debug.Log("Simulation server listening on port: " + _port);
+            server.Start();
+    }
 }

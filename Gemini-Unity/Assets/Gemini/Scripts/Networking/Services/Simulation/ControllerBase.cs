@@ -11,7 +11,7 @@ namespace Gemini.Networking.Services
     {
         public string host = "localhost";
 
-        private int _port = 12346;
+        protected int _port = 12346;
 
         public int Port
         {
@@ -19,48 +19,6 @@ namespace Gemini.Networking.Services
         }
         protected static bool isServerinInitialized = false;
 
-        public GameObject[] boatPrefabs;
-
-        private SimulationServiceImpl serviceImpl;
-        protected Server server = new Server
-                {
-                    Services = {},
-                    Ports = {}
-                };
-    
-
-        void Awake()
-        {
-            if (!isServerinInitialized) 
-            {
-                server = new Server
-                {
-                    Services = {Simulation.BindService(serviceImpl)},
-                    Ports = { new ServerPort(host, _port, ServerCredentials.Insecure) }
-                };
-
-                Debug.Log("Simulation server listening on port: " + _port);
-                server.Start();
-                isServerinInitialized = true;
-            }
-        }
-
-        /*
-        void Start()
-        {
-            if (!isServerinInitialized) 
-            {
-                server = new Server
-                {
-                    Services = { Simulation.BindService(serviceImpl) },
-                    Ports = { new ServerPort(host, _port, ServerCredentials.Insecure) }
-                };
-
-                Debug.Log("Simulation server listening on port: " + _port);
-                server.Start();
-                isServerinInitialized = true;
-            }
-        }
-        */
+        protected static Server server;
     }
 }

@@ -37,7 +37,7 @@ namespace Gemini.Networking.Services
                 _boats[prefabIdx] = Instantiate(boatPrefabs[prefabIdx], new Vector3(0, 0, 0), Quaternion.identity);
             }
 
-            serviceImpl = new SimulationServiceImpl(this);
+            //serviceImpl = new SimulationServiceImpl(this);
 
             server = new Server
             {

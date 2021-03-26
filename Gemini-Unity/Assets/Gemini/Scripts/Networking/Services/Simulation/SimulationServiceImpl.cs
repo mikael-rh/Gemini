@@ -16,8 +16,25 @@ namespace Gemini.Networking.Services {
     {
         delegate T Del<T, V>(V request);
 
+/*
         private SimulationController _simulationController;
         public SimulationServiceImpl(SimulationController simulationController)
+        {
+            _simulationController = simulationController;
+        }
+
+        //private ControllerBase _controller;
+
+        //public SimulationServiceImpl(ControllerBase controller)
+        //{
+        //    _controller = controller;
+        //}
+        */
+    
+
+
+        private BoatController _simulationController;
+        public SimulationServiceImpl(BoatController simulationController)
         {
             _simulationController = simulationController;
         }
