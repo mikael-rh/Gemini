@@ -17,7 +17,7 @@ namespace Gemini.Networking.Services
         {
             get => _port;
         }
-        protected static bool isServerinInitialized = false;
+        protected static bool isServerInitialized = false;
 
         protected static Server server;
     }

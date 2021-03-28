@@ -53,26 +53,25 @@ public class BoatController : ControllerBase, ISimulationService
 
     void Start()
     {
+        _boats = new GameObject[boatPrefabs.Length];
+        for (int prefabIdx = 0; prefabIdx < boatPrefabs.Length; prefabIdx++)
+        {
+            _boats[prefabIdx] = Instantiate(boatPrefabs[prefabIdx], new Vector3(0, 0, 0), Quaternion.identity);
+        }
 
-            _boats = new GameObject[boatPrefabs.Length];
-            for (int prefabIdx = 0; prefabIdx < boatPrefabs.Length; prefabIdx++)
+        if (!isServiceInitialized) 
+            serviceImpl = new SimulationServiceImpl(this);
+
+        if (!isServerInitialized)
+        {
+            server = new Server
             {
-                _boats[prefabIdx] = Instantiate(boatPrefabs[prefabIdx], new Vector3(0, 0, 0), Quaternion.identity);
-            }
+                Services = { Simulation.BindService(serviceImpl) },
+                Ports = { new ServerPort(host, _port, ServerCredentials.Insecure) }
+            };
+        }
 
-            if (!isServiceInitialized) 
-                serviceImpl = new SimulationServiceImpl(this);
-
-            if (!isServerinInitialized)
-            {
-                server = new Server
-                {
-                    Services = { Simulation.BindService(serviceImpl) },
-                    Ports = { new ServerPort(host, _port, ServerCredentials.Insecure) }
-                };
-            }
-
-            Debug.Log("Simulation server listening on port: " + _port);
-            server.Start();
+        Debug.Log("Simulation server listening on port: " + _port);
+        server.Start();
     }
 }
