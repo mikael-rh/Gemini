@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Gemini.Networking.Services;
+using Gemini.EMRS.Core;
 using GeminiOSPInterface;
 using Grpc.Core;
 
@@ -13,8 +14,10 @@ public class SimulationController : ControllerBase, ISimulationService
     private string _startTime;
 
     private GameObject[] _boats;
+    private Sensor[] sensors;
     
     public GameObject[] boatPrefabs;
+
 
     public StepResponse DoStep(StepRequest request)
     {
@@ -53,16 +56,18 @@ public class SimulationController : ControllerBase, ISimulationService
 
     void Start()
     {
+        sensors = Sensor.GetActiveSensors();
+
         _boats = new GameObject[boatPrefabs.Length];
         for (int prefabIdx = 0; prefabIdx < boatPrefabs.Length; prefabIdx++)
         {
             _boats[prefabIdx] = Instantiate(boatPrefabs[prefabIdx], new Vector3(0, 0, 0), Quaternion.identity);
         }
 
-        if (!isServiceInitialized) 
+        if (serviceImpl == null) 
             serviceImpl = new SimulationServiceImpl(this);
 
-        if (!isServerInitialized)
+        if (server == null)
         {
             server = new Server
             {
