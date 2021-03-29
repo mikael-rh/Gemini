@@ -8,20 +8,28 @@ using Grpc.Core;
 
 public class SimulationController : ControllerBase, ISimulationService 
 {
-    private static bool isServiceInitialized = false;
     private static SimulationServiceImpl serviceImpl;
 
     private string _startTime;
 
     private GameObject[] _boats;
-    private Sensor[] sensors;
     
+    private bool isStateUpdated = false;
     public GameObject[] boatPrefabs;
 
 
     public StepResponse DoStep(StepRequest request)
     {
+        // Update states
         UpdateBoats(request);
+
+        // Render/retrieve all sensors/sensordata
+
+
+        // Send all rendered sensor data
+
+        // Return when all sensor data has been sent
+
         return new StepResponse{Success = true};
     }
 
@@ -56,8 +64,6 @@ public class SimulationController : ControllerBase, ISimulationService
 
     void Start()
     {
-        sensors = Sensor.GetActiveSensors();
-
         _boats = new GameObject[boatPrefabs.Length];
         for (int prefabIdx = 0; prefabIdx < boatPrefabs.Length; prefabIdx++)
         {
