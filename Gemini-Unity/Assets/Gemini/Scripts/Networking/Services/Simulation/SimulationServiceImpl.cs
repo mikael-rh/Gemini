@@ -25,7 +25,21 @@ namespace Gemini.Networking.Services {
         public override async Task<StepResponse> DoStep(
             StepRequest request, ServerCallContext context)
         {
-            return await Task.FromResult(Executor.Execute<StepResponse, Del<StepResponse, StepRequest>, StepRequest>(_simulationController.DoStep, request)); 
+
+            //return await Task.FromResult(Executor.Execute<StepResponse, Del<StepResponse, StepRequest>, StepRequest>(_simulationController.DoStep, request));
+
+            // Retreive result from updating states
+            StepResponse result = await Task.FromResult(Executor.Execute<StepResponse, Del<StepResponse, StepRequest>, StepRequest>(_simulationController.DoStep, request));
+
+            // Do not return until the whole simulation step is done, including rendering
+            /*
+                while (!triggered)
+                {
+
+                }
+            */
+
+            return result;
         }
 
         public override async Task<SetStartTimeResponse> SetStartTime(

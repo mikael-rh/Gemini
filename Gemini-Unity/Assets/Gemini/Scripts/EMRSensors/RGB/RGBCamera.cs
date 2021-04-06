@@ -1,31 +1,54 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Rendering;
 using Gemini.EMRS.Core;
 using Gemini.EMRS.Core.ZBuffer;
-
-using UnityEngine.Rendering;
-
+using Gemini.Networking.Clients;
 using Google.Protobuf;
-using Grpc.Core;
-using Sensorstreaming;
 
 namespace Gemini.EMRS.RGB
 {
+    public struct CameraImage {
+
+        public CameraImage(float time, string frameID, uint height, uint width)
+        {
+            data = ByteString.CopyFrom();
+            this.time = time;
+            this.frameID = frameID;
+            this.height = height;
+            this.width = width;
+        }
+
+        public ByteString data;
+        public float time;
+        public string frameID;
+        public uint height;
+        public uint width;
+    }
+
     [RequireComponent(typeof(Camera))]
-    public class RGBScript : Sensor
+    public class RGBCamera : SensorNew<CameraImage>
     {
         public RenderTexture _cameraBuffer { get; set; }
         public RenderTexture SampleCameraImage;
         public ComputeShader cameraShader;
         public string FrameID = "F";
         public int ImageCrop = 4;
-        public bool SynchronousUpdate = true;
+        public bool SynchronousUpdate = false;
+
+        private bool _hasRenderedWhenUpdated = false;
+
+        public bool HasRenderedWhenUpdated
+        {
+            get => _hasRenderedWhenUpdated;
+            set => _hasRenderedWhenUpdated = value;
+        }
 
         private Camera camera;
         private UnifiedArray<byte> cameraData;
         private RenderTextureFormat renderTextureFormat = RenderTextureFormat.Default;
         private TextureFormat textureFormat = TextureFormat.RGB24;
 
+        private float time = 0f;
 
         [Space]
         [Header("Camera Parameters")]
@@ -36,9 +59,18 @@ namespace Gemini.EMRS.RGB
         public float focalLengthMilliMeters = 5.5f;
         public float pixelSizeInMicroMeters = 3.45f;
         public DepthBits DepthBufferPrecision = DepthBits.Depth24;
+        public ByteString Data { get; private set; } = ByteString.CopyFromUtf8("");
 
-        void Start()
+
+        private void Awake()
         {
+            SetupSensorCallbacks(new SensorCallback(RGBUpdate, SensorCallbackOrder.Last)); 
+        }
+
+        private void Start()
+        {
+            _sensorData = new CameraImage(0f, FrameID, (uint)(PixelHeight / ImageCrop), (uint)(PixelWidth / ImageCrop));
+
             CameraSetup();
 
             int kernelIndex = cameraShader.FindKernel("CSMain");
@@ -49,48 +81,13 @@ namespace Gemini.EMRS.RGB
             cameraShader.SetInt("Height", PixelHeight / ImageCrop);
         }
 
-        private void Awake()
-        {
-            SetupSensorCallbacks(new SensorCallback(RGBUpdate, SensorCallbackOrder.Last)); 
-        }
 
-        public ByteString Data { get; private set; } = ByteString.CopyFromUtf8("");
-        public override bool SendMessage()
-        {
-            //Debug.Log("RGB " + FrameID + " message time: " + OSPtime);
-            if(SampleCameraImage != null)
-            {
-                Graphics.Blit(camera.targetTexture, SampleCameraImage);
-            }
-
-            // TODO: Remove
-
-            bool success = false;
-            connectionTime = Time.time;
-             
-            if(connectionTime < ConnectionTimeout || connected)
-            {
-                try
-                {
-                    success = _streamingClient.StreamCameraSensor(new CameraStreamingRequest { Data = Data, TimeStamp = OSPtime, FrameId = FrameID, Height = (uint)(PixelHeight/ImageCrop), Width = (uint)(PixelWidth/ImageCrop) }).Success;
-                    connected = success;
-                } catch (RpcException e)
-                {
-                    Debug.LogException(e);
-                }
-            }
-
-            return success;
-            
-        }
-
-        void RGBUpdate(ScriptableRenderContext context, Camera[] cameras)
+        private void RGBUpdate(ScriptableRenderContext context, Camera[] cameras)
         {
             if (SynchronousUpdate)
             {
                 cameraData.SynchUpdate(cameraShader, "CSMain");
-                Data = ByteString.CopyFrom(cameraData.array);
-                gate = true;
+                _sensorData.data = ByteString.CopyFrom(cameraData.array);
             }
             else
             {
@@ -98,13 +95,12 @@ namespace Gemini.EMRS.RGB
             }
         }
 
-        void ReadbackCompleted(AsyncGPUReadbackRequest request)
+        private void ReadbackCompleted(AsyncGPUReadbackRequest request)
         {
-            Data = ByteString.CopyFrom(request.GetData<byte>().ToArray());
-            gate = true;
+            _sensorData.data = ByteString.CopyFrom(request.GetData<byte>().ToArray());
         }
 
-        byte[] RenderTextureToBinary(Camera cam)
+        private byte[] RenderTextureToBinary(Camera cam)
         {
             // The Render Texture in RenderTexture.active is the one
             // that will be read by ReadPixels.
@@ -138,5 +134,9 @@ namespace Gemini.EMRS.RGB
             //camera.enabled = false;
         }
 
+        public static RGBCamera[] GetActiveCameras()
+        {
+            return GameObject.FindObjectsOfType<RGBCamera>();
+        }
     }
 }

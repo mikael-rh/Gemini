@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Gemini.Networking.Services;
+using Gemini.Networking.Clients;
 using Gemini.EMRS.Core;
+using Gemini.EMRS.RGB;
 using GeminiOSPInterface;
 using Grpc.Core;
 
@@ -14,23 +17,33 @@ public class SimulationController : ControllerBase, ISimulationService
 
     private GameObject[] _boats;
     
-    private bool isStateUpdated = false;
-    public GameObject[] boatPrefabs;
+    private bool _isStatesUpdated = false;
 
+    private RGBCamera[] _rgbCameras;
+
+    private CameraClient _cameraClient;
+
+    public GameObject[] boatPrefabs;
 
     public StepResponse DoStep(StepRequest request)
     {
-        // Update states
-        UpdateBoats(request);
+        UpdateStates(request);
 
-        // Render/retrieve all sensors/sensordata
+        foreach (RGBCamera camera in _rgbCameras)
+        {
+            if (camera.SensorData.data != null)
+            {
 
-
-        // Send all rendered sensor data
-
-        // Return when all sensor data has been sent
+            }
+        }
 
         return new StepResponse{Success = true};
+    }
+
+    private void UpdateStates(StepRequest request)
+    {
+        UpdateBoats(request);
+        _isStatesUpdated = true;
     }
 
     public SetStartTimeResponse SetStartTime(SetStartTimeRequest request)
@@ -64,6 +77,9 @@ public class SimulationController : ControllerBase, ISimulationService
 
     void Start()
     {
+        _rgbCameras = RGBCamera.GetActiveCameras();
+        _cameraClient = new CameraClient();
+
         _boats = new GameObject[boatPrefabs.Length];
         for (int prefabIdx = 0; prefabIdx < boatPrefabs.Length; prefabIdx++)
         {
@@ -85,4 +101,5 @@ public class SimulationController : ControllerBase, ISimulationService
         Debug.Log("Simulation server listening on port: " + _port);
         server.Start();
     }
+
 }
