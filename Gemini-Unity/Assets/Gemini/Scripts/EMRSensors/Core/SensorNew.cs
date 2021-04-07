@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Gemini.Networking.Clients;
 
 namespace Gemini.EMRS.Core {
     public abstract class SensorNew<T> : MonoBehaviour
@@ -9,6 +10,10 @@ namespace Gemini.EMRS.Core {
 
         //public bool RunRecording = false;
         protected T _sensorData;
+
+        protected bool hasSentDataOnPrevUpdate = false;
+
+        protected Client<T> _client;
 
         public T SensorData {
             get {return _sensorData;}

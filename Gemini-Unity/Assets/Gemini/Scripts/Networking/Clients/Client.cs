@@ -6,7 +6,7 @@ using Grpc.Core;
 namespace Gemini.Networking.Clients {
     public abstract class Client<T>
     {
-        private static string serverIP = "192.168.1.235";
+        private static string serverIP = "192.168.26.128";
 
         private static int serverPort = 30052;
 

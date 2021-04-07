@@ -14,8 +14,8 @@ namespace Gemini.EMRS.RGB
             data = ByteString.CopyFrom();
             this.time = time;
             this.frameID = frameID;
-            this.height = height;
             this.width = width;
+            this.height = height;
         }
 
         public ByteString data;
@@ -43,10 +43,12 @@ namespace Gemini.EMRS.RGB
             set => _hasRenderedWhenUpdated = value;
         }
 
-        private Camera camera;
-        private UnifiedArray<byte> cameraData;
-        private RenderTextureFormat renderTextureFormat = RenderTextureFormat.Default;
-        private TextureFormat textureFormat = TextureFormat.RGB24;
+        private Camera _camera;
+        private UnifiedArray<byte> _cameraData;
+        private RenderTextureFormat _renderTextureFormat = RenderTextureFormat.Default;
+        private TextureFormat _textureFormat = TextureFormat.RGB24;
+
+        private CameraClient client;
 
         private float time = 0f;
 
@@ -69,14 +71,15 @@ namespace Gemini.EMRS.RGB
 
         private void Start()
         {
+            _client = new CameraClient();
             _sensorData = new CameraImage(0f, FrameID, (uint)(PixelHeight / ImageCrop), (uint)(PixelWidth / ImageCrop));
 
             CameraSetup();
 
             int kernelIndex = cameraShader.FindKernel("CSMain");
-            cameraData = new UnifiedArray<byte>(PixelHeight * PixelWidth, sizeof(float) * 3, "CameraData");
-            cameraData.SetBuffer(cameraShader, "CSMain");
-            cameraShader.SetTexture(kernelIndex, "RenderTexture", camera.targetTexture);
+            _cameraData = new UnifiedArray<byte>(PixelHeight * PixelWidth, sizeof(float) * 3, "CameraData");
+            _cameraData.SetBuffer(cameraShader, "CSMain");
+            cameraShader.SetTexture(kernelIndex, "RenderTexture", _camera.targetTexture);
             cameraShader.SetInt("Width", PixelWidth / ImageCrop);
             cameraShader.SetInt("Height", PixelHeight / ImageCrop);
         }
@@ -86,20 +89,21 @@ namespace Gemini.EMRS.RGB
         {
             if (SynchronousUpdate)
             {
-                cameraData.SynchUpdate(cameraShader, "CSMain");
-                _sensorData.data = ByteString.CopyFrom(cameraData.array);
+                _cameraData.SynchUpdate(cameraShader, "CSMain");
+                _sensorData.data = ByteString.CopyFrom(_cameraData.array);
+                _client.SendMessage(_sensorData);
             }
             else
             {
-                AsyncGPUReadback.Request(camera.activeTexture, 0, textureFormat, ReadbackCompleted);
+                AsyncGPUReadback.Request(_camera.activeTexture, 0, _textureFormat, ReadbackCompleted);
             }
         }
 
         private void ReadbackCompleted(AsyncGPUReadbackRequest request)
         {
             _sensorData.data = ByteString.CopyFrom(request.GetData<byte>().ToArray());
+            _client.SendMessage(_sensorData);
         }
-
         private byte[] RenderTextureToBinary(Camera cam)
         {
             // The Render Texture in RenderTexture.active is the one
@@ -108,7 +112,7 @@ namespace Gemini.EMRS.RGB
             RenderTexture.active = cam.targetTexture;
 
             // Make a new texture and read the active Render Texture into it.
-            Texture2D image = new Texture2D(cam.targetTexture.width, cam.targetTexture.height, textureFormat, false, true);
+            Texture2D image = new Texture2D(cam.targetTexture.width, cam.targetTexture.height, _textureFormat, false, true);
             image.ReadPixels(new Rect(0, 0, cam.targetTexture.width, cam.targetTexture.height), 0, 0);
             image.Apply();
 
@@ -120,17 +124,17 @@ namespace Gemini.EMRS.RGB
         private void CameraSetup()
         {
             CameraFrustum frustums = new CameraFrustum(PixelWidth, PixelHeight, FarPlane, NearPlane, focalLengthMilliMeters, pixelSizeInMicroMeters);
-            _cameraBuffer = new RenderTexture(PixelWidth / ImageCrop, PixelHeight / ImageCrop, (int)DepthBufferPrecision, renderTextureFormat, 0);
+            _cameraBuffer = new RenderTexture(PixelWidth / ImageCrop, PixelHeight / ImageCrop, (int)DepthBufferPrecision, _renderTextureFormat, 0);
 
-            camera = gameObject.GetComponent<Camera>();
-            camera.usePhysicalProperties = false;
-            camera.targetTexture = _cameraBuffer;
+            _camera = gameObject.GetComponent<Camera>();
+            _camera.usePhysicalProperties = false;
+            _camera.targetTexture = _cameraBuffer;
 
-            camera.aspect = frustums._aspectRatio;//Mathf.Tan(Mathf.PI / numbers) / Mathf.Tan(frustums._verticalAngle / 2.0f);
+            _camera.aspect = frustums._aspectRatio;//Mathf.Tan(Mathf.PI / numbers) / Mathf.Tan(frustums._verticalAngle / 2.0f);
             Debug.Log("Aspect Ratio RGB: " + frustums._aspectRatio.ToString());
-            camera.fieldOfView = frustums._verticalAngle * Mathf.Rad2Deg;//Camera.HorizontalToVerticalFieldOfView(360.0f / numbers, cam.aspect);
-            camera.farClipPlane = frustums._farPlane;
-            camera.nearClipPlane = frustums._nearPlane;
+            _camera.fieldOfView = frustums._verticalAngle * Mathf.Rad2Deg;//Camera.HorizontalToVerticalFieldOfView(360.0f / numbers, cam.aspect);
+            _camera.farClipPlane = frustums._farPlane;
+            _camera.nearClipPlane = frustums._nearPlane;
             //camera.enabled = false;
         }
 

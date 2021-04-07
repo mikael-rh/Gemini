@@ -19,6 +19,8 @@ public class SimulationController : ControllerBase, ISimulationService
     
     private bool _isStatesUpdated = false;
 
+    private bool hasAllSensorsRenderedOnPrevUpdate = false;
+
     private RGBCamera[] _rgbCameras;
 
     private CameraClient _cameraClient;
@@ -28,14 +30,6 @@ public class SimulationController : ControllerBase, ISimulationService
     public StepResponse DoStep(StepRequest request)
     {
         UpdateStates(request);
-
-        foreach (RGBCamera camera in _rgbCameras)
-        {
-            if (camera.SensorData.data != null)
-            {
-
-            }
-        }
 
         return new StepResponse{Success = true};
     }
