@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Scenario : ExtendedMonoBehaviour {
-    private const float SPAWN_INTERVAL = 1, TAKEOVER_FORCE = 20000, SHUTDOWN_TIME = 20;
+    private const float TAKEOVER_FORCE = 20000, SHUTDOWN_TIME = 20;
 
-    public int spawnAmount = 5, tripCount = 3, stepDelay = 20;
-    public float manualTakeoverDelay = 10;
+    public int spawnAmount = 5, tripCount = 3;
+    public float stepDelay = 5, manualTakeoverDelay = 10;
 
     private FerryController ferry;
     private FerryTrip trip;
@@ -34,7 +34,7 @@ public class Scenario : ExtendedMonoBehaviour {
 
         player.GetComponent<EmbarkPassenger>().OnBoardingCompleted.AddListener(trip.Play);
 
-        Schedule(Play, 2);
+        Schedule(Play, 1);
     }
 
     public void Play() {
@@ -49,9 +49,7 @@ public class Scenario : ExtendedMonoBehaviour {
     private void Step() {
         if (tripCount > 0) {
             tripCount--;
-            Repeat(() => { ferry.dock.SpawnPassenger(); }, 
-            onCompletion: ferry.dock.EmbarkAll, 
-            times: spawnAmount, interval: SPAWN_INTERVAL);
+            trip.Play();
 
             if (tripCount == 0) manualTakeoverAtTime = Time.time + stepDelay + manualTakeoverDelay;
         }

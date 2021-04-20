@@ -2675,7 +2675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnAmount: 5
   tripCount: 3
-  stepDelay: 35
+  stepDelay: 5
   manualTakeoverDelay: 20
 --- !u!4 &1383457043
 Transform:

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using AdvancedCustomizableSystem;
 using UnityEngine.Events;
 
 public class Passenger : MonoBehaviour {
@@ -12,7 +11,6 @@ public class Passenger : MonoBehaviour {
     [HideInInspector]
     public UnityEvent OnDestinationReached;
     public NavMeshAgent agent { get; private set; }
-    private CharacterCustomization character;
 
     private bool idle;
 
@@ -20,10 +18,6 @@ public class Passenger : MonoBehaviour {
 
     private void Start() {
         agent = GetComponentInChildren<NavMeshAgent>();
-        character = GetComponentInChildren<CharacterCustomization>();
-
-        character.Randomize();
-        // character.BakeCharacter();
         agent.updateRotation = true;
         agent.updatePosition = true;
     }
@@ -34,13 +28,6 @@ public class Passenger : MonoBehaviour {
     }
 
     private void Update() {
-        float speed = agent.velocity.magnitude;
-        bool walk = speed > SPEED_THRESHOLD;
-        character.animators.ForEach(x => {
-            x.SetBool("walk", walk);
-            x.speed = walk ? Mathf.Max(MIN_ANIM_SPEED, ANIM_SPEED * speed) : 1;
-        });
-
         if (!idle && ReachedDestination) {
             OnDestinationReached?.Invoke();
         }
