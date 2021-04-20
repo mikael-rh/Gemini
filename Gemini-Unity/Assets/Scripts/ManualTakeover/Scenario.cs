@@ -5,7 +5,7 @@ using UnityEngine;
 public class Scenario : ExtendedMonoBehaviour {
     private const float TAKEOVER_FORCE = 20000, SHUTDOWN_TIME = 20;
 
-    public int spawnAmount = 5, tripCount = 3;
+    public int tripCount = 3;
     public float stepDelay = 5, manualTakeoverDelay = 10;
 
     private FerryController ferry;
